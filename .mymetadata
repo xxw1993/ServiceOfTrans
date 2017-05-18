@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ServiceOfTrans"
+  id="myeclipse.1495095704170"
+  context-root="/ServiceOfTrans"
+  j2ee-spec="5.0"
+  archive="ServiceOfTrans.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
