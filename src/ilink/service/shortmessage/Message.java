@@ -64,9 +64,9 @@ public class Message extends HttpServlet {
 				} else if (requestCode == RequestCode.SYSTEMUPDATE_CODE) {
 
 				} else if (requestCode == RequestCode.RESETPWD_CODE) {
-
+					GetResetCode();
 				} else if (requestCode == RequestCode.CHANGEPWD_CODE) {
-
+					GetChangeCode();
 				} else {
 
 				}
@@ -78,6 +78,68 @@ public class Message extends HttpServlet {
 			// TODO: handle exception
 		}
 
+	}
+
+	private void GetChangeCode() {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> result = null;
+		CCPRestSDK restAPI = new CCPRestSDK();
+		restAPI.init(MessageSet.MESSAGE_SERVEL_URL,
+				MessageSet.MESSAGE_SERVEL_PORT);// 初始化服务器地址和端口，格式如下，服务器地址不需要写https://
+		restAPI.setAccount(MessageSet.MESSAGE_MAIN_ACCOUNT,
+				MessageSet.MESSAGE_MAIN_ACCOUNT_TOKEN);// 初始化主帐号和主帐号TOKEN
+		restAPI.setAppId(MessageSet.MESSAGE_APP_ID);// 初始化应用ID
+		result = restAPI.sendTemplateSMS(PhoneNumber,
+				MessageSet.MESSAGE_REGISTER, new String[] { "112",
+						MessageSet.MESSAGE_TIME });
+
+		System.out.println(" result=" + result);
+
+		if ((MessageSet.MESSAGE_SUCCESS_CODE).equals(result.get("statusCode"))) {
+			// 正常返回输出data包体信息（map）
+			HashMap<String, Object> data = (HashMap<String, Object>) result
+					.get("data");
+			Set<String> keySet = data.keySet();
+			for (String key : keySet) {
+				Object object = data.get(key);
+				System.out.println(key + " = " + object);
+			}
+		} else {
+			// 异常返回输出错误码和错误信息
+			System.out.println("错误码=" + result.get("statusCode") + " 错误信息= "
+					+ result.get("statusMsg"));
+		}
+	}
+
+	private void GetResetCode() {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> result = null;
+		CCPRestSDK restAPI = new CCPRestSDK();
+		restAPI.init(MessageSet.MESSAGE_SERVEL_URL,
+				MessageSet.MESSAGE_SERVEL_PORT);// 初始化服务器地址和端口，格式如下，服务器地址不需要写https://
+		restAPI.setAccount(MessageSet.MESSAGE_MAIN_ACCOUNT,
+				MessageSet.MESSAGE_MAIN_ACCOUNT_TOKEN);// 初始化主帐号和主帐号TOKEN
+		restAPI.setAppId(MessageSet.MESSAGE_APP_ID);// 初始化应用ID
+		result = restAPI.sendTemplateSMS(PhoneNumber,
+				MessageSet.MESSAGE_REGISTER, new String[] { "112",
+						MessageSet.MESSAGE_TIME });
+
+		System.out.println(" result=" + result);
+
+		if ((MessageSet.MESSAGE_SUCCESS_CODE).equals(result.get("statusCode"))) {
+			// 正常返回输出data包体信息（map）
+			HashMap<String, Object> data = (HashMap<String, Object>) result
+					.get("data");
+			Set<String> keySet = data.keySet();
+			for (String key : keySet) {
+				Object object = data.get(key);
+				System.out.println(key + " = " + object);
+			}
+		} else {
+			// 异常返回输出错误码和错误信息
+			System.out.println("错误码=" + result.get("statusCode") + " 错误信息= "
+					+ result.get("statusMsg"));
+		}
 	}
 
 	private void GetRegisterCode() {
